@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
 from osgeo import gdal
-import os
+import os,cv2
 import numpy as np
 import pandas as pd
 from GDAL_Raster.OpenTIF import read_img
@@ -179,7 +179,7 @@ def showMultiBandTIFFGray(RasterData):
     plt.show()
 
 # 显示彩色遥感影像
-def showColorTIFF(RasterData,bandRindex,bandGindex,bandBindex):
+def showColorTIFF(RasterData,bandRindex=1,bandGindex=2,bandBindex=3):
     image_data = RasterData.ReadAsArray()
     band1 = RasterData.GetRasterBand(1).ReadAsArray()
     band2 = RasterData.GetRasterBand(2).ReadAsArray()
@@ -212,6 +212,43 @@ def showColorTIFF(RasterData,bandRindex,bandGindex,bandBindex):
     plt.axis('off')
     plt.show()
 
+def normalizationOfBand(band):
+    max = np.max(band)
+    min = np.min(band)
+    print(max,min)
+    newband = (band - min) / (max - min)
+    return newband
+
+def QshowColorTIFF(strRasterData,bandRindex=4,bandGindex=3,bandBindex=2):
+    RasterData = read_img(strRasterData)
+    band1 = RasterData.GetRasterBand(1).ReadAsArray()
+    band2 = RasterData.GetRasterBand(2).ReadAsArray()
+    band3 = RasterData.GetRasterBand(3).ReadAsArray()
+    band4 = RasterData.GetRasterBand(4).ReadAsArray()
+
+    bandR = band1 if bandRindex == 1 else band2 if bandRindex == 2 else band3 if bandRindex == 3 else band4
+    bandG = band1 if bandGindex == 1 else band2 if bandGindex == 2 else band3 if bandGindex == 3 else band4
+    bandB = band1 if bandBindex == 1 else band2 if bandBindex == 2 else band3 if bandBindex == 3 else band4
+
+    bandR = normalizationOfBand(bandR)
+    bandG = normalizationOfBand(bandG)
+    bandB = normalizationOfBand(bandB)
+    # opencv使用的是BGR格式
+    bands = np.array([bandB, bandG, bandR]).transpose((1, 2, 0))
+    bands = (bands*255).astype(np.uint8)
+    print(bands.shape)
+    print(bands.size)
+    print(bands.dtype)
+
+    shortFilename = strRasterData.split('.')[0]  # 获取文件名【不包含后缀名】
+    print(shortFilename)
+    out_jpg = shortFilename + "_temp.jpg"  # 临时文件
+    print('out_jpg:' + out_jpg)
+    cv2.imwrite(out_jpg, bands)
+    cv2.destroyAllWindows()  # 销毁内存
+    return out_jpg
+
+
 # 主函数
 if __name__ == '__main__':
     #获取工程根目录的路径
@@ -229,20 +266,20 @@ if __name__ == '__main__':
     #showShortImage()
 
     #引入OpenTIF中的图像读取方法读图像数据
-    dataset = read_img(imagepath)
+    #dataset = read_img(imagepath)
 
     # 显示遥感影像某一波段灰度图
-    band1 = dataset.GetRasterBand(1)
+    #band1 = dataset.GetRasterBand(1)
     #showGreyTIFF(band1)
     #ListShowTIFF(band1)
     #ShowTIFFHist(band1)
     #ShowTIFFBoxplot(band1)
 
     # 显示遥感影像的所有单波段灰度图像
-    showMultiBandTIFFGray(dataset)
+    #showMultiBandTIFFGray(dataset)
 
     # 显示彩色遥感影像
-    #showColorTIFF(dataset,1,2,3)
+    QshowColorTIFF(imagepath,1,2,3)
 
 
 

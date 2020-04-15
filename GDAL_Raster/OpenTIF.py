@@ -10,21 +10,22 @@ def read_img(filename):
     #栅格矩阵的列数
     im_width = dataset.RasterXSize
     print('-------栅格矩阵的列数---------')
-    print (im_width)
+    print(im_width)
     #栅格矩阵的行数
     im_height = dataset.RasterYSize
     print('-------栅格矩阵的行数---------')
-    print (im_height)
+    print(im_height)
     #地图投影信息
     im_proj = dataset.GetProjection()
     print('-------地图投影信息---------')
-    print (im_proj)
+    print(im_proj)
     #将数据写成数组，对应栅格矩阵
     im_data = dataset.ReadAsArray(0,0,im_width,im_height)
     print('-------影像属性---波段数，行数，列数------')
-    print (im_data.shape)
+    print(im_data.shape)
     print('-------栅格矩阵信息---------')
-    print (im_data)
+    print(im_data)
+    print(im_data.dtype)
     #清除数据集缓存
     del im_data
     #返回获取的参数

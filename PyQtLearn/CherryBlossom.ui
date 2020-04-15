@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>533</width>
+    <height>422</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>CherryBlossom</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>CherryBlossomIcon.svg</normaloff>CherryBlossomIcon.svg</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>10</number>
+    </property>
+    <property name="topMargin">
+     <number>10</number>
+    </property>
+    <property name="rightMargin">
+     <number>10</number>
+    </property>
+    <property name="bottomMargin">
+     <number>10</number>
+    </property>
+    <property name="spacing">
+     <number>5</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>511</width>
+         <height>355</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QLabel" name="lbl_image">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>533</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuPicture">
+    <property name="title">
+     <string>&amp;Picture</string>
+    </property>
+    <addaction name="aOpenNaturalPicture"/>
+   </widget>
+   <widget class="QMenu" name="menuMultispectral">
+    <property name="title">
+     <string>&amp;Multispectral</string>
+    </property>
+    <addaction name="aOpenSingleBandFromMulti"/>
+    <addaction name="aOpenRGBFromMulti"/>
+    <addaction name="actionRGBtoHSV"/>
+    <addaction name="actionNDVI"/>
+   </widget>
+   <widget class="QMenu" name="menuHyperspectral">
+    <property name="title">
+     <string>&amp;Hyperspectral</string>
+    </property>
+    <addaction name="aOpenRGBFromHyper"/>
+   </widget>
+   <widget class="QMenu" name="menu_Help">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+   </widget>
+   <addaction name="menuPicture"/>
+   <addaction name="menuMultispectral"/>
+   <addaction name="menuHyperspectral"/>
+   <addaction name="menu_Help"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="aOpenNaturalPicture">
+   <property name="text">
+    <string>Open</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI</family>
+    </font>
+   </property>
+  </action>
+  <action name="aOpenSingleBandFromMulti">
+   <property name="text">
+    <string>OpenSingleBand</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI</family>
+    </font>
+   </property>
+  </action>
+  <action name="aOpenRGBFromMulti">
+   <property name="text">
+    <string>OpenRGB</string>
+   </property>
+  </action>
+  <action name="actionRGBtoHSV">
+   <property name="text">
+    <string>RGBtoHSV</string>
+   </property>
+  </action>
+  <action name="actionNDVI">
+   <property name="text">
+    <string>NDVI</string>
+   </property>
+  </action>
+  <action name="aOpenRGBFromHyper">
+   <property name="text">
+    <string>OpenRGB</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI</family>
+    </font>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

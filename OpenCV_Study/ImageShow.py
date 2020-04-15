@@ -22,6 +22,7 @@ def cvshowbasicimg(imgFile):
     print(img.size)#总通道数=高* 宽* 通道数
     print(img.dtype)#3个通道每个通道占的位数（8位，一个字节）
     print(cv2.mean(img))
+    print(img.data)
     cv2.imshow("source",img)
     b,g,r=cv2.split(img)
     cv2.imshow("B",b)
@@ -36,6 +37,22 @@ def cvshowbasicimg(imgFile):
     cv2.imshow(gbk_title,imgviewx2)#图片显示
     cv2.waitKey(0)#代表由手动确定下一步操作，否则会出现显示图像一闪而过的情况，或是出现图像无响应的情况
     cv2.destroyAllWindows()#销毁内存
+
+def cvshowimgRGB(imgFile):
+    img = cv2.imread(imgFile, cv2.IMREAD_COLOR)
+    print(img.shape)  # 输出：高像素，宽像素，通道数
+    print(img.size)  # 总通道数=高* 宽* 通道数
+    print(img.dtype)  # 3个通道每个通道占的位数（8位，一个字节）
+    cv2.imshow("source", img)
+    cv2.waitKey(0)  # 代表由手动确定下一步操作，否则会出现显示图像一闪而过的情况，或是出现图像无响应的情况
+    cv2.destroyAllWindows()  # 销毁内存
+
+def cvreadRGB(imgFile):
+    img = cv2.imread(imgFile, cv2.IMREAD_COLOR)
+    print(img.shape)  # 输出：高像素，宽像素，通道数
+    print(img.size)  # 总通道数=高* 宽* 通道数
+    print(img.dtype)  # 3个通道每个通道占的位数（8位，一个字节）
+    return img
 
 # 灰度图直方图
 def getGrayHist(img):
@@ -179,7 +196,7 @@ if __name__=='__main__':
     # 切换目录
     os.chdir(dataPath)
     imgFile ="cat.jpg"
-    #cvshowbasicimg(imgFile)
-    getGrayHist(imgFile)
+    cvshowbasicimg(imgFile)
+    #getGrayHist(imgFile)
     #getRGBHist(imgFile)
     #getRGBHistOnebyOne(imgFile)
